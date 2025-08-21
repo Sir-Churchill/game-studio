@@ -3,7 +3,6 @@ from django.shortcuts import render
 
 from core.models import Studio, Worker, Game
 
-
 def index(request: HttpRequest) -> HttpResponse:
     num_studios = Studio.objects.count()
     num_workers = Worker.objects.count()
