@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Welcome to StudioVerse!</h1>
+
+    <p>Discover the universe of games, studios, and the talented people behind them. Explore, connect, and dive into the world of game creation.
+    </p>
+
+    <ul>
+        <li>Studios about we know information {{ num_studios }}</li>
+        <li>Games about we know {{ num_games }}</li>
+        <li>Workers that working in studios {{ num_workers }}</li>
+    </ul>
+{% endblock %}
