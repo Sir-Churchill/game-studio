@@ -19,12 +19,13 @@ class Position(models.Model):
 
 class Worker(AbstractUser):
     position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='workers')
+    studio = models.ForeignKey(Studio, on_delete=models.CASCADE, related_name='workers')
 
     class Meta:
         verbose_name = 'worker'
         verbose_name_plural = 'workers'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.position.name}: {self.first_name} {self.last_name}"
 
 class Game(models.Model):
@@ -36,5 +37,5 @@ class Game(models.Model):
     workers = models.ManyToManyField(Worker, related_name='games')
 
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name} {self.genre} {self.description}"
