@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>
+        {{ worker.first_name }} {{ worker.last_name }} {{ worker.position.name }}
+    </h1>
+    <p>{{ worker.username }}</p>
+    <p>{{ worker.email }}</p>
+
+    <h2>The studio where he works</h2>
+    <p>{{ worker.studio.name }}</p>
+
+    <h2>Games he has worked on or is currently working on</h2>
+    <ul>
+        {% for game in worker.games.all %}
+            <li>{{ game.name }}</li>
+        {% endfor %}
+    </ul>
+
+
+    
+{% endblock %}
