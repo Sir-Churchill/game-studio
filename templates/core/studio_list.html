@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Studios</h1>
+
+    {% if studio_list %}
+        <ul>
+            {% for studio in studio_list %}
+                <li><a href="{% url 'core:studio-detail' studio.id %}">{{ studio.name }}</a> {{ studio.country }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No studios found.</p>
+    {% endif %}
+
+{% endblock %}
