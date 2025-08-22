@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Worker List</h1>
+
+    {% if worker_list %}
+        <ul>
+            {% for worker in worker_list %}
+                <li>{{ worker.first_name }} {{ worker.last_name }} {{ worker.position.name }} <a href="{% url 'core:worker-detail' worker.id %}">{{ worker.username }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
