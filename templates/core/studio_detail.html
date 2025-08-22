@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>{{studio.name}}</h1>
+
+    <h2>Games from this studio</h2>
+    <ul>
+        {% for game in studio.games.all %}
+            <li>{{game.name}}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Workers that work in this company</h2>
+    <ul>
+        {% for worker in studio.workers.all %}
+            <li>{{ worker.first_name }} {{ worker.last_name }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
