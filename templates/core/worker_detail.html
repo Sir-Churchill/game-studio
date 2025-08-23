@@ -3,10 +3,15 @@
 
 {% block content %}
     <h1>
-        {{ worker.first_name }} {{ worker.last_name }} {{ worker.position.name }}
+        {{ worker.username }}
+    <a href="{% url 'core:worker-delete' worker.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
     </h1>
-    <p>{{ worker.username }}</p>
-    <p>{{ worker.email }}</p>
+    <p><strong>First Name: {{ worker.first_name }}</strong></p>
+    <p><strong>Last Name: {{ worker.last_name }}</strong></p>
+    <p><strong>Position: {{ worker.position.name }}</strong></p>
+    <p><strong>Email: {{ worker.email }}</strong></p>
 
     <h2>The studio where he works</h2>
     <p>{{ worker.studio.name }}</p>
