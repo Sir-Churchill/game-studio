@@ -2,7 +2,11 @@
 
 
 {% block content %}
-    <h1>Worker List</h1>
+    <h1>Worker List
+    <a class="btn btn-primary float-right" href="{% url 'core:worker-create' %}">
+        Create
+    </a>
+    </h1>
 
     {% if worker_list %}
         <ul>
