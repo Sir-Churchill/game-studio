@@ -2,15 +2,57 @@
 
 
 {% block content %}
-    <h1>Games list</h1>
+  <h1>Games list
+    <a class="btn btn-primary float-right" href="{% url 'core:games-create' %}">
+        Create
+    </a>
+    </h1>
 
-    {% if game_list %}
-        <ul>
-            {% for game in game_list %}
-                <li>{{ game.name }} {{ game.genre }} {{ game.release_date }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No games found.</p>
-    {% endif %}
+  {% if game_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Description</th>
+        <th>Release Date</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for game in game_list %}
+        <tr>
+          <td>
+              {{ game.id }}
+          </td>
+          <td>
+              {{ game.name }}
+          </td>
+          <td>
+              {{ game.genre }}
+          </td>
+            <td>
+                {{ game.description }}
+            </td>
+            <td>
+                {{ game.release_date }}
+            </td>
+          <td>
+              <a href="{% url 'core:games-update' pk=game.id %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a style="color: red"
+                href="{% url 'core:games-delete' pk=game.id %}">
+                Delete
+              </a>
+            </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>No games found.</p>
+  {% endif %}
 {% endblock %}
