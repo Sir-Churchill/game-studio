@@ -1,10 +1,15 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from core.forms import WorkerCreationForm, WorkerUpdateForm, GameForm, StudioSearchForm, WorkerSearchForm, \
+    GameSearchForm
 from core.models import Studio, Worker, Game
 
+@login_required
 def index(request: HttpRequest) -> HttpResponse:
     num_studios = Studio.objects.count()
     num_workers = Worker.objects.count()
@@ -19,70 +24,116 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request,'core/index.html', context=context)
 
 
-class StudioListView(generic.ListView):
+class StudioListView(LoginRequiredMixin ,generic.ListView):
     model = Studio
+    queryset = Studio.objects.all()
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(StudioListView, self).get_context_data(**kwargs)
+        context['search_form'] = StudioSearchForm(
+            initial= {'name': self.request.GET.get('name', '')}
+        )
 
-class StudioDetailView(generic.DetailView):
+        return context
+
+    def get_queryset(self):
+
+        form = StudioSearchForm(self.request.GET)
+        if form.is_valid():
+            return self.queryset.filter(name__icontains=form.cleaned_data['name'])
+        return self.queryset
+
+
+class StudioDetailView(LoginRequiredMixin ,generic.DetailView):
     model = Studio
 
 
-class StudioCreateView(generic.CreateView):
+class StudioCreateView(LoginRequiredMixin, generic.CreateView):
     model = Studio
     fields = "__all__"
     success_url = reverse_lazy('core:studio-list')
 
 
-class StudioUpdateView(generic.UpdateView):
+class StudioUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Studio
     fields = "__all__"
     success_url = reverse_lazy('core:studio-list')
 
 
-class StudioDeleteView(generic.DeleteView):
+class StudioDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Studio
     success_url = reverse_lazy('core:studio-list')
 
-class WorkerListView(generic.ListView):
+class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
     queryset = Worker.objects.all().prefetch_related('games__studio')
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(WorkerListView, self).get_context_data(**kwargs)
+        context['search_form'] = WorkerSearchForm(
+            initial= {'name': self.request.GET.get('username', '')}
+        )
+        return context
 
-class WorkerDetailView(generic.DetailView):
+    def get_queryset(self):
+        form = WorkerSearchForm(self.request.GET)
+        if form.is_valid():
+            return self.queryset.filter(username__icontains=form.cleaned_data['username'])
+        return self.queryset
+
+
+class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
 
 
-class WorkerCreateView(generic.CreateView):
+class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Worker
-    fields = "__all__"
+    form_class = WorkerCreationForm
     success_url = reverse_lazy('core:worker-list')
 
 
-class WorkerDeleteView(generic.DeleteView):
+class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Worker
+    form_class = WorkerUpdateForm
+    success_url = reverse_lazy('core:worker-list')
+
+class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Worker
     success_url = reverse_lazy('core:worker-list')
 
 
-class GameListView(generic.ListView):
+class GameListView(LoginRequiredMixin, generic.ListView):
     model = Game
     queryset = Game.objects.all().select_related('studio')
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(GameListView, self).get_context_data(**kwargs)
+        context['search_form'] = GameSearchForm(
+            initial= {'name': self.request.GET.get('name', '')}
+        )
+        return context
 
-class GameCreateView(generic.CreateView):
+    def get_queryset(self):
+        form = GameSearchForm(self.request.GET)
+        if form.is_valid():
+            return self.queryset.filter(name__icontains=form.cleaned_data['name'])
+        return self.queryset
+
+class GameCreateView(LoginRequiredMixin, generic.CreateView):
     model = Game
-    fields = "__all__"
+    form_class = GameForm
     success_url = reverse_lazy('core:game-list')
 
 
-class GameUpdateView(generic.UpdateView):
+class GameUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Game
-    fields = "__all__"
+    form_class = GameForm
     success_url = reverse_lazy('core:game-list')
 
 
-class GameDeleteView(generic.DeleteView):
+class GameDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Game
     success_url = reverse_lazy('core:game-list')
