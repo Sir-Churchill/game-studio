@@ -16,7 +16,7 @@ def index(request: HttpRequest) -> HttpResponse:
     num_games = Game.objects.count()
 
     context = {
-        'num_studios': num_studios,
+        'num_studio': num_studios,
         'num_worker': num_workers,
         'num_game': num_games,
     }
