@@ -2,7 +2,11 @@
 
 
 {% block content %}
-    <h1>Studios</h1>
+    <h1>Studios
+    <a class="btn btn-primary float-right" href="{% url 'core:studio-create' %}">
+        Create
+    </a>
+    </h1>
 
     {% if studio_list %}
         <ul>
