@@ -7,6 +7,10 @@
         Create
     </a>
     </h1>
+    <form method="get" action="" class="form-inline">
+        {{ search_form }}
+        <input type="submit" value="Search">
+    </form>
 
     {% if worker_list %}
         <ul>
