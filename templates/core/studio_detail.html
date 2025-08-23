@@ -2,8 +2,16 @@
 
 
 {% block content %}
-    <h1>{{studio.name}}</h1>
+    <h1>{{studio.name}}
+     <a href="{% url 'core:studio-delete' pk=studio.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
 
+    <a href="{% url 'core:studio-update' pk=studio.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
+    </h1>
+    <h2>Country: {{ studio.country }}</h2>
     <h2>Games from this studio</h2>
     <ul>
         {% for game in studio.games.all %}
