@@ -13,7 +13,7 @@ from .views import (index,
                     WorkerListView,
                     WorkerDetailView,
                     WorkerCreateView,
-                    WorkerDeleteView
+                    WorkerDeleteView, WorkerUpdateView
 
                     )
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('workers/', WorkerListView.as_view(), name='worker-list'),
     path('workers/<int:pk>/', WorkerDetailView.as_view(), name='worker-detail'),
     path('workers/create/', WorkerCreateView.as_view(), name='worker-create'),
+    path('workers/<int:pk>/update/', WorkerUpdateView.as_view(), name='worker-update'),
     path('workers/<int:pk>/delete/', WorkerDeleteView.as_view(), name='worker-delete'),
     path('games/', GameListView.as_view(), name='game-list'),
     path('games/create/', GameCreateView.as_view(), name='games-create'),
