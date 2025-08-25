@@ -1,10 +1,11 @@
-
 .container-worker-detail {
     max-width: 1200px;
-    margin-left: 600px;
+    margin: 0 auto; /* центрируем контейнер */
     padding: 20px;
     color: #fff;
+    box-sizing: border-box;
 }
+
 
 
 .page-header {

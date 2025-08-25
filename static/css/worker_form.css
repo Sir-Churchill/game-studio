@@ -1,7 +1,13 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* разрешаем вертикальный скролл */
+}
 
 .container-worker-form {
     max-width: 600px;
-    margin-left: 860px;
+    margin: 0 auto;
     padding: 20px;
     color: #fff;
 }
@@ -83,6 +89,13 @@
     transform: translateY(-2px) scale(1.02);
 }
 
+
+@media (max-width: 1920px) {
+    .container-worker-form {
+        max-width: 800px;
+        margin-top: 300px; /* попробуй нужное значение */
+    }
+}
 
 @media (max-width: 768px) {
     .container-worker-form {

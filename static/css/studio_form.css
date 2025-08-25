@@ -1,11 +1,10 @@
 
 .container-list-form {
     max-width: 500px;
-    margin-left: 900px;
+    margin: 0 auto;
     padding: 20px;
     color: #fff;
 }
-
 
 .page-header h1 {
     font-size: 2rem;
