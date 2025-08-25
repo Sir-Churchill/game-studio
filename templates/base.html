@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>StudioVerse</title>
+    {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+    <body>
+    <div class="container-fluid">
+        {% if user.is_authenticated %}
+
+        <div class="row">
+            <div>
+                {% include "includes/sidebar.html" %}
+            </div>
+            <div class="col-md-10 p-4">
+                {% block content %}{% endblock %}
+            </div>
+            {% block pagination %}
+                <div class="pagination-wrapper">
+                    {% include "includes/pagination.html" %}
+                </div>
+            {% endblock %}
+        </div>
+        {% else %}
+            <div class="col-12 p-4">
+                {% block login %}{% endblock %}
+            </div>
+        {% endif %}
+    </div>
+    </body>
+</html>

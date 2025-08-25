@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/studio_detail.css' %}">
+{% endblock %}
+
+<div class="container-list-detail">
+
+
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <h1 class="mb-0">{{ studio.name }}</h1>
+        <div class="btn-group">
+            <a href="{% url 'core:studio-update' studio.id %}" class="btn btn-secondary btn-sm">Update</a>
+            <a href="{% url 'core:studio-delete' studio.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    </div>
+
+
+    <h3 class="mb-4">Country: {{ studio.country }}</h3>
+
+
+    <h4>Games in this studio</h4>
+    <div class="game-grid">
+        {% for game in studio.games.all %}
+        <div class="game-card">
+            <h5>{{ game.name }}</h5>
+            <p>{{ game.genre }}<br>{{ game.description }}</p>
+            <p><small>Release: {{ game.release_date }}</small></p>
+        </div>
+        {% empty %}
+        <div class="empty-state">No games yet</div>
+        {% endfor %}
+    </div>
+
+
+    <h4 class="mt-5">Workers</h4>
+    <div class="worker-grid">
+        {% for worker in studio.workers.all %}
+        <div class="worker-card">
+            <h5>{{ worker.first_name }} {{ worker.last_name }}</h5>
+            <p>{{ worker.position }}</p>
+        </div>
+        {% empty %}
+        <div class="empty-state">No workers yet</div>
+        {% endfor %}
+    </div>
+
+
+    <div class="mt-4">
+        {% if user.studio == studio %}
+            <a href="{% url 'core:toggle_assign_to_studio' studio.id %}" class="btn btn-danger">Leave this studio</a>
+        {% elif user.studio %}
+            <p class="text-warning">You are already in another studio: {{ user.studio.name }}</p>
+        {% else %}
+            <a href="{% url 'core:toggle_assign_to_studio' studio.id %}" class="btn btn-success">Join this studio</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js_scripts %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const gameCards = document.querySelectorAll('.game-card');
+    const workerCards = document.querySelectorAll('.worker-card');
+
+    gameCards.forEach((card, i) => setTimeout(() => card.classList.add('animate-in'), i * 100));
+    workerCards.forEach((card, i) => setTimeout(() => card.classList.add('animate-in'), i * 100));
+});
+</script>
+{% endblock %}

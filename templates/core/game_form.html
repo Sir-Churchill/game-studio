@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/game_form.css' %}">
+
+<div class="container-game-form">
+
+    <!-- Header -->
+    <div class="page-header">
+        <h1>{{ object|yesno:"Update,Create" }} Game</h1>
+    </div>
+
+    <!-- Form Card -->
+    <div class="form-card">
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <!-- Iterate over form fields -->
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+
+                    {% if field.name == "workers" %}
+                    <div class="multi-checkbox-container">
+                        {{ field }}
+                    </div>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="field-error">{{ field.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+
+            <input type="submit" class="btn btn-primary-list mt-3" value="Submit">
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const submitBtn = document.querySelector('.btn-primary-list');
+    submitBtn.addEventListener('mouseenter', () => submitBtn.style.transform = 'translateY(-2px) scale(1.02)');
+    submitBtn.addEventListener('mouseleave', () => submitBtn.style.transform = 'translateY(0) scale(1)');
+});
+</script>
+{% endblock %}

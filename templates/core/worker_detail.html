@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/worker_detail.css' %}">
+
+<div class="container-worker-detail">
+
+    <!-- Header -->
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <h1 class="mb-0">{{ worker.username }}</h1>
+        <div class="btn-group">
+            <a href="{% url 'core:worker-update' worker.id %}" class="btn btn-secondary btn-sm">Update</a>
+            <a href="{% url 'core:worker-delete' worker.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    </div>
+
+    <!-- Worker Info -->
+    <div class="worker-info mb-4">
+        <p><strong>First Name:</strong> {{ worker.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ worker.last_name }}</p>
+        <p><strong>Position:</strong> {{ worker.position.name }}</p>
+        <p><strong>Studio:</strong> {{ worker.studio.name }}</p>
+    </div>
+
+    <!-- Games Worked On -->
+    <h4>Games Worked On</h4>
+    <div class="game-grid">
+        {% for game in worker.games.all %}
+        <div class="game-card">
+            <h5>{{ game.name }}</h5>
+            <p>{{ game.genre }}<br>{{ game.description }}</p>
+            <p><small>Release: {{ game.release_date }}</small></p>
+        </div>
+        {% empty %}
+        <div class="empty-state">No games assigned</div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const gameCards = document.querySelectorAll('.game-card');
+
+    gameCards.forEach((card, i) => {
+        card.style.opacity = '1';
+        card.style.transform = 'none';
+    });
+
+    gameCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+});
+</script>
+{% endblock %}
+

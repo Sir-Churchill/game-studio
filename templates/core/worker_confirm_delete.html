@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <div class="delete-container">
+        <h1 class="text-danger">Delete worker?</h1>
+        <p class="warning-text">This action is permanent and cannot be undone.</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions">
+                <input type="submit" class="btn btn-danger delete-btn" value="Yes, delete">
+                <a href="{% url 'core:studio-list' %}" class="btn btn-secondary cancel-btn">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js_scripts %}
+    <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

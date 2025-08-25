@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<div class="login-section">
+
+  <div class="welcome-text">
+    <h1>Welcome to StudioVerse</h1>
+    <p>StudioVerse is a digital platform for the gaming industry, connecting game studios, projects, and professionals in one space.
+        We make it easy for studios to find skilled workers, track ongoing projects, and build their dream teams.</p>
+    <p>Developers and specialists can discover exciting opportunities, participate in ambitious projects, and grow their skills.</p>
+    <p>StudioVerse is where games are created and careers are built.</p>
+
+  </div>
+
+
+  <div class="stats-container">
+    <div class="stat-card">
+      <h2 class="counting-number" data-target="{{ num_studio }}">0</h2>
+      <p>Studios</p>
+    </div>
+    <div class="stat-card">
+      <h2 class="counting-number" data-target="{{ num_game }}">0</h2>
+      <p>Games</p>
+    </div>
+    <div class="stat-card">
+      <h2 class="counting-number" data-target="{{ num_worker }}">0</h2>
+      <p>Workers</p>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function animateCounter(element, target, duration = 2000, delay = 0) {
+    setTimeout(() => {
+        const start = 0;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(start + (target - start) * easeOut);
+
+            element.textContent = current;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target;
+            }
+        }
+
+        requestAnimationFrame(updateCounter);
+    }, delay);
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Script loaded!');
+    const counters = document.querySelectorAll('.counting-number');
+    console.log('Found counters:', counters.length);
+
+    counters.forEach((counter, index) => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        console.log(`Counter ${index}: target = ${target}`);
+        const delay = 1500 + (index * 200);
+        animateCounter(counter, target, 2500, delay);
+    });
+});
+</script>
+{% endblock %}
