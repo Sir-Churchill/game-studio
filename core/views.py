@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -27,7 +27,7 @@ def index(request: HttpRequest) -> HttpResponse:
 class StudioListView(LoginRequiredMixin ,generic.ListView):
     model = Studio
     queryset = Studio.objects.all()
-    paginate_by = 5
+    paginate_by = 6
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(StudioListView, self).get_context_data(**kwargs)
@@ -68,7 +68,7 @@ class StudioDeleteView(LoginRequiredMixin, generic.DeleteView):
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
     queryset = Worker.objects.all().prefetch_related('games__studio')
-    paginate_by = 5
+    paginate_by = 6
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)
@@ -107,7 +107,7 @@ class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
 class GameListView(LoginRequiredMixin, generic.ListView):
     model = Game
     queryset = Game.objects.all().select_related('studio')
-    paginate_by = 5
+    paginate_by = 6
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(GameListView, self).get_context_data(**kwargs)
@@ -137,3 +137,15 @@ class GameUpdateView(LoginRequiredMixin, generic.UpdateView):
 class GameDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Game
     success_url = reverse_lazy('core:game-list')
+
+def toggle_assign_to_studio(request, pk):
+    worker = request.user
+    studio = Studio.objects.get(id=pk)
+
+    if worker.studio == studio:
+        worker.studio = None
+    else:
+        worker.studio = studio
+
+    worker.save()
+    return HttpResponseRedirect(reverse_lazy('core:studio-detail', args=[pk]))
