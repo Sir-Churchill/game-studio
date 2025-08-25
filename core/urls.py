@@ -13,12 +13,13 @@ from .views import (index,
                     WorkerListView,
                     WorkerDetailView,
                     WorkerCreateView,
-                    WorkerDeleteView, WorkerUpdateView
+                    WorkerDeleteView, WorkerUpdateView, toggle_assign_to_studio
 
                     )
 
 urlpatterns = [
     path('', index, name='index'),
+    path('studios/<int:pk>/toggle-assign/', toggle_assign_to_studio, name='toggle_assign_to_studio'),
     path('studios/', StudioListView.as_view(), name='studio-list'),
     path('studios/create/', StudioCreateView.as_view(), name='studio-create'),
     path('studios/<int:pk>/update/', StudioUpdateView.as_view(), name='studio-update'),
@@ -30,9 +31,9 @@ urlpatterns = [
     path('workers/<int:pk>/update/', WorkerUpdateView.as_view(), name='worker-update'),
     path('workers/<int:pk>/delete/', WorkerDeleteView.as_view(), name='worker-delete'),
     path('games/', GameListView.as_view(), name='game-list'),
-    path('games/create/', GameCreateView.as_view(), name='games-create'),
-    path('games/<int:pk>/update/', GameUpdateView.as_view(), name='games-update'),
-    path('games/<int:pk>/delete/', GameDeleteView.as_view(), name='games-delete'),
+    path('games/create/', GameCreateView.as_view(), name='game-create'),
+    path('games/<int:pk>/update/', GameUpdateView.as_view(), name='game-update'),
+    path('games/<int:pk>/delete/', GameDeleteView.as_view(), name='game-delete'),
 
 ]
 
