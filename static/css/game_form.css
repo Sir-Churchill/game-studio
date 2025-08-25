@@ -1,12 +1,32 @@
-
-.container-game-form {
-    max-width: 600px;
-    margin-top: 120px;
-    margin-left: 850px;
-    padding: 20px;
-    color: #fff;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* разрешаем вертикальный скролл */
 }
 
+
+
+.container-game-form {
+    max-width: 600px;      /* для нормальных экранов */
+    width: 100%;
+    margin: 120px auto 0;
+    padding: 20px;
+    color: #fff;
+    display: block;
+}
+
+.col-md-10 {
+    margin: 0 auto;
+    float: none;
+}
+
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 100% высоты окна */
+}
 
 .page-header h1 {
     font-size: 2rem;
@@ -84,11 +104,39 @@
     transform: translateY(-2px) scale(1.02);
 }
 
+@media (max-width: 1920px) {
+    .container-game-form {
+        max-width: 800px;
+        margin-top: 450px; /* центрируем */
+    }
+}
+
+
+
+@media (max-width: 992px) {
+    .container-game-form {
+        max-width: 500px;
+        margin-top: 80px;
+        padding: 15px;
+    }
+}
 
 @media (max-width: 768px) {
     .container-game-form {
-        padding: 15px;
+        max-width: 90%;      /* занимаем почти весь экран */
+        margin-top: 60px;
+        padding: 12px;
     }
+
+
+    /* совсем маленькие */
+@media (max-width: 480px) {
+    .container-game-form {
+        max-width: 100%;
+        margin-top: 40px;
+        padding: 10px;
+    }
+}
 
     .form-card {
         padding: 20px;
