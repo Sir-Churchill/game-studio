@@ -1,0 +1,137 @@
+
+.page-header h1 {
+    margin-right: 700px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #b46cff 0%, #ff6f91 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #F2CEFF;
+}
+
+
+.game-grid, .worker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+.game-card, .worker-card {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+
+.game-card.animate-in, .worker-card.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+
+.game-card:hover, .worker-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(180,108,255,0.3);
+}
+
+.game-card h5, .worker-card h5 {
+    background: linear-gradient(135deg, #F2CEFF 0%, #fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.empty-state {
+    text-align: center;
+    padding: 20px;
+    color: #B8B6DB;
+    font-size: 1.1rem;
+}
+
+.container-list-detail {
+    max-width: 1000px; /* или 90% для гибкости */
+    width: 90%;
+    margin: 100px auto 0; /* центрирование по горизонтали и отступ сверху */
+    padding: 20px;
+    color: #fff;
+}
+
+
+.page-header h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+    white-space: nowrap;        /* не переносить слова */
+    overflow: hidden;           /* обрезать, если не помещается */
+    text-overflow: ellipsis;    /* добавляет "..." при переполнении */
+}
+
+
+.game-grid,
+.worker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.game-card {
+    background: rgba(33, 32, 66, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 20px;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: all 0.5s ease-out;
+}
+
+.worker-card {
+    background: rgba(33, 32, 66, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;          /* увеличиваем внутренние отступы */
+    flex: 0 0 320px;        /* фиксированная ширина карточки */
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.game-card.animate-in, .worker-card.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.game-card:hover, .worker-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(180,108,255,0.3);
+}
+
+.game-card h5, .worker-card h5 {
+    background: linear-gradient(135deg, #F2CEFF 0%, #fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 20px;
+    color: #B8B6DB;
+    font-size: 1.1rem;
+}
+
+.btn-success, .btn-danger, .btn-secondary {
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(180,108,255,0.3); }
+.btn-danger:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(180,108,255,0.3); }
+.btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(180,108,255,0.3); }
+
+.container-list-detail h3,
+.container-list-detail h4 {
+    color: #F2CEFF;
+}

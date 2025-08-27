@@ -1,0 +1,165 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* разрешаем вертикальный скролл */
+}
+
+
+
+.container-game-form {
+    max-width: 600px;      /* для нормальных экранов */
+    width: 100%;
+    margin: 120px auto 0;
+    padding: 20px;
+    color: #fff;
+    display: block;
+}
+
+.col-md-10 {
+    margin: 0 auto;
+    float: none;
+}
+
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 100% высоты окна */
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #b46cff 0%, #ff6f91 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.form-card {
+    background: rgba(33, 32, 66, 0.85);
+    padding: 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 30px rgba(180, 108, 255, 0.2);
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #F2CEFF;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: 1px solid #57557A;
+    background: rgba(33, 32, 66, 0.8);
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #b46cff;
+    box-shadow: 0 0 20px rgba(180, 108, 255, 0.3);
+}
+
+
+.field-error {
+    color: #ff6f91;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+
+.btn-primary-list {
+    background: linear-gradient(135deg, #b46cff 0%, #ff6f91 100%);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-list:hover {
+    background: linear-gradient(135deg, #ff6f91 0%, #b46cff 100%);
+    box-shadow: 0 8px 25px rgba(180, 108, 255, 0.4);
+    transform: translateY(-2px) scale(1.02);
+}
+
+@media (max-width: 1920px) {
+    .container-game-form {
+        max-width: 800px;
+        margin-top: 450px; /* центрируем */
+    }
+}
+
+
+
+@media (max-width: 992px) {
+    .container-game-form {
+        max-width: 500px;
+        margin-top: 80px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-game-form {
+        max-width: 90%;      /* занимаем почти весь экран */
+        margin-top: 60px;
+        padding: 12px;
+    }
+
+
+    /* совсем маленькие */
+@media (max-width: 480px) {
+    .container-game-form {
+        max-width: 100%;
+        margin-top: 40px;
+        padding: 10px;
+    }
+}
+
+    .form-card {
+        padding: 20px;
+    }
+
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+}
+
+
+.multi-checkbox-container {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #57557A;
+    border-radius: 12px;
+    background: rgba(33, 32, 66, 0.8);
+}
+
+
+.multi-checkbox-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+}

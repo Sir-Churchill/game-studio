@@ -1,0 +1,19 @@
+{% if is_paginated %}
+<div class="pagination-wrapper">
+  <ul class="custom-pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}{% if request.GET.name %}&name={{ request.GET.name }}{% endif %}">&laquo; Prev</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo; Prev</span></li>
+    {% endif %}
+
+    <li class="active"><span>{{ page_obj.number }} of {{ paginator.num_pages }}</span></li>
+
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}{% if request.GET.name %}&name={{ request.GET.name }}{% endif %}">Next &raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>Next &raquo;</span></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}

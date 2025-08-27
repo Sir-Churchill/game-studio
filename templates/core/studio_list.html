@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<div class="container-list">
+
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <h1 class="mb-0">Studios</h1>
+        <a class="btn btn-primary-list" href="{% url "core:studio-create" %}" onclick="showNewCardAnimation()">Create Studio</a>
+    </div>
+
+
+    <div class="search-container">
+        <form method="get" class="d-flex gap-3 align-items-center" action="">
+            {{ search_form.name|add_class:"form-control-list" }}
+            <input type="submit" class="btn btn-secondary-list" value="Search">
+        </form>
+    </div>
+
+
+    <div class="studio-grid" id="studioGrid">
+        {% for studio in studio_list %}
+            <div class="studio-card" onclick="navigateToDetail(this)" data-studio-id="{{ studio.id }}">
+                <h5>{{ studio.name }}</h5>
+                <p>{{ studio.country }}</p>
+                <a href="{% url 'core:studio-detail' studio.id %}" class="btn btn-primary-list btn-sm" onclick="event.stopPropagation();">Details</a>
+            </div>
+        {% empty %}
+            <p>No studios found.</p>
+        {% endfor %}
+    </div>
+
+
+    <div id="emptyState" class="empty-state" style="display: none;">
+        <p>No studios found.</p>
+        <a href="{% url "core:studio-create" %}" class="btn btn-primary-list" onclick="showNewCardAnimation()">Create Studio</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_scripts %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.game-card');
+    const form = document.querySelector('form');
+    const grid = document.getElementById('gameGrid');
+    const emptyState = document.getElementById('emptyState');
+
+    console.log("JS загружен, карточек найдено:", cards.length);
+
+
+    cards.forEach((card, i) => {
+        card.style.display = 'block';
+        setTimeout(() => { card.classList.add('animate-in'); }, i * 100);
+    });
+
+
+    window.navigateToDetail = function(card, gameId) {
+        const url = `/game/${gameId}/`;
+        card.style.transform = 'translateY(-10px) scale(0.95)';
+        setTimeout(() => { window.location.href = url; }, 150);
+    };
+
+
+    window.showNewCardAnimation = function() {
+        const newCard = document.createElement('div');
+        newCard.className = 'game-card';
+        newCard.innerHTML = `
+            <h5>New Game</h5>
+            <p>Loading...</p>
+            <a href="#" class="btn btn-primary btn-sm">Details</a>
+        `;
+        grid.appendChild(newCard);
+        setTimeout(() => { newCard.classList.add('animate-in'); }, 100);
+    };
+
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const searchTerm = form.querySelector('input[type="text"]').value.toLowerCase().trim();
+        console.log("Поиск запустился, term:", searchTerm);
+
+
+        if (!searchTerm) {
+            cards.forEach((card, i) => {
+                card.style.display = 'block';
+                setTimeout(() => { card.classList.add('animate-in'); }, i * 50);
+            });
+            emptyState.style.display = 'none';
+            return;
+        }
+
+        let visibleCount = 0;
+        cards.forEach((card, index) => {
+            const name = card.querySelector('h5').textContent.toLowerCase();
+            const genreAndDesc = card.querySelector('p').textContent.toLowerCase();
+
+            if (name.includes(searchTerm) || genreAndDesc.includes(searchTerm)) {
+                card.style.display = 'block';
+                setTimeout(() => { card.classList.add('animate-in'); }, index * 100);
+                visibleCount++;
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px) scale(0.9)';
+                setTimeout(() => { card.style.display = 'none'; }, 300);
+            }
+        });
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+});
+</script>
+{% endblock %}

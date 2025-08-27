@@ -1,0 +1,72 @@
+
+.container-list-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #fff;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #b46cff 0%, #ff6f91 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.form-card {
+    background: rgba(33, 32, 66, 0.85);
+    padding: 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 30px rgba(180, 108, 255, 0.2);
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #F2CEFF;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: 1px solid #57557A;
+    background: rgba(33, 32, 66, 0.8);
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #b46cff;
+    box-shadow: 0 0 20px rgba(180, 108, 255, 0.3);
+}
+
+
+.btn-primary-list {
+    background: linear-gradient(135deg, #b46cff 0%, #ff6f91 100%);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-list:hover {
+    background: linear-gradient(135deg, #ff6f91 0%, #b46cff 100%);
+    box-shadow: 0 8px 25px rgba(180, 108, 255, 0.4);
+    transform: translateY(-2px) scale(1.02);
+}

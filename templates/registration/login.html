@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block login %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-12 col-md-6 col-lg-5">
+        <div class="card py-5 px-4 login-card">
+        <div class="top-decor">
+            <span class="brand">StudioVerse</span>
+          <a href="https://github.com/Sir-Churchill/game-studio" target="_blank" class="top-btn">
+            GITHUB PROJECT
+          </a>
+        </div>
+            <h2 class="text-center mb-4 login-title">Login in StudioVerse</h2>
+
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    Your username and password didn't match. Please try again.
+                </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">👤 Username</label>
+                    {{ form.username|add_class:"form-control form-control-lg" }}
+                </div>
+                <div class="form-group">
+                    <label for="password">🔒 Password</label>
+                    {{ form.password|add_class:"form-control form-control-lg" }}
+                </div>
+
+                <div class="form-group form-check d-flex justify-content-between align-items-center">
+                    <div>
+                        <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
+                        <label class="form-check-label" for="remember_me">Remember me</label>
+                    </div>
+                    <a href="#" class="bn">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg mt-4">Login</button>
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
