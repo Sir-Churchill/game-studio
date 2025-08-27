@@ -43,3 +43,15 @@ The project features a modern UI with custom styles (gradient headers, cards, ad
    ```bash
    git clone https://github.com/Sir-Churchill/game-studio.git
    cd game_studio
+## 🔑 Demo Login
+
+You can use the following credentials to access the application:
+
+- **Username:** kiborg
+- **Password:** gorigori292
+
+---
+
+## 🌐 Live Demo
+
+Check out the live application here: [Game Studios Manager](https://game-studio-krlz.onrender.com)
